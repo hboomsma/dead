@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Hostnet Dead Code Elimination</title>
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript" src="js/d3.layout.js"></script>
+<link type="text/css" rel="stylesheet" href="css/treemap.css" />
+</head>
+<body>
+    <div id="index">
+        <ul>
+        <script type="text/javascript">
+            var index = d3.select("#index ul");
+            d3.json("tables.php", function(json) {
+              json.forEach(function(d) {
+                link =
+                    "<a href=\"#\" onClick=\"doLoad('" +
+                    d + 
+                    "')\">" +
+                    d +
+                    "</a>";
+                index.append("li").html(link);
+              });
+            });
+        </script>
+        </ul>
+    </div>
+    <div id="treemap">
+        <div id="crumb">
+            <span id="current_path"></span><span id="current_file"></span>
+        </div>
+        <div id="chart" oncontextmenu="return false;"></div>
+        <div id="color_scale">
+            <div id="color_start">0%</div>
+            <div id="color_gradient">1% - 99% unused</div>
+            <div id="color_end">100%</div>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th class="sortable" sort="path" sort_type="string">path <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="pct_dead">% † <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="dead_count"># †<img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="file_count"># .php <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="hit_count"># hits <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="changed_at" sort_type="string">age <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="first_hit" sort_type="string">first hit time <img src="img/empty.gif" /></th>
+                    <th class="sortable" sort="last_hit" sort_type="string">last hit time <img src="img/empty.gif" /></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <img id="saturation"></img>
+        <script type="text/javascript" src="js/treemap.js"></script>
+    </div>
+</body>
+</html>

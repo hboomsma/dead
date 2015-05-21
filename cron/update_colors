@@ -1,0 +1,8 @@
+#!/bin/bash
+DEAD="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../bin" && pwd )/dead.phar"
+COLORS="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../web/colors" && pwd )"
+APPS="$($DEAD tables)"
+
+for APP in $APPS; do
+    $DEAD -t $APP color > $COLORS/$APP.txt
+done

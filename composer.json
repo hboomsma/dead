@@ -1,0 +1,30 @@
+{
+    "name": "hostnet/dead",
+    "description": "Dead Code Browser and cron project",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4",
+        "pear/console_commandline": "*@dev",
+        "pear/pear_exception": "*@dev",
+        "hostnet/dead-tool": "1.*, >=1.3"
+    },
+    "minimum-stability": "stable",
+    "scripts": {
+        "post-install-cmd": [
+            "cd vendor/hostnet/dead-tool && make",
+            "mv vendor/hostnet/dead-tool/dead.phar bin/dead.phar",
+            "chmod a+x bin/dead.phar",
+            "if [ ! -d web/colors ]; then mkdir -p web/colors; fi",
+            "#cron/update_colors"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Hidde Boomsma",
+            "email": "hboomsma@hostnet.nl"
+        }
+    ],
+    "archive": {
+        "exclude": [ "/test" ]
+    }
+}
